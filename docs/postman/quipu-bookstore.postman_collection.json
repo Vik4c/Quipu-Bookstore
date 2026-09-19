@@ -18,8 +18,8 @@
     },
     {
       "key": "crudClientSecret",
-      "value": "",
-      "description": "Set locally before running. Never commit a filled-in copy."
+      "value": "crud123!",
+      "description": "Local assessment-only mock value (matches appsettings.Development.json / .env.example). Not a real secret. If you override DevelopmentAuth:CrudClientSecret locally, replace this Current value with yours."
     },
     {
       "key": "readClientId",

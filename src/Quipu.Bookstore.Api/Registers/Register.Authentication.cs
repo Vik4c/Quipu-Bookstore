@@ -1,4 +1,4 @@
-using Quipu.Bookstore.Api.Authentication;
+using Quipu.Bookstore.Api.Authentication.Seeding;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using OpenIddict.Validation.AspNetCore;

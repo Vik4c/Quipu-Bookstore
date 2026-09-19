@@ -1,4 +1,4 @@
-using Quipu.Bookstore.Api.Authentication;
+using Quipu.Bookstore.Api.Authentication.Tokens;
 using Quipu.Bookstore.Api.Authorization;
 using static OpenIddict.Server.OpenIddictServerEvents;
 

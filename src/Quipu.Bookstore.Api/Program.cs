@@ -1,4 +1,5 @@
 using Quipu.Bookstore.Api.Authentication;
+using Quipu.Bookstore.Api.Authentication.Seeding;
 using Quipu.Bookstore.Api.Registers;
 using Quipu.Bookstore.Application;
 using Quipu.Bookstore.Storage;

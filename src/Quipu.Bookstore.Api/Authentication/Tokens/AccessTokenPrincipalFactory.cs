@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 using System.Security.Claims;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace Quipu.Bookstore.Api.Authentication
+namespace Quipu.Bookstore.Api.Authentication.Tokens
 {
     public static class AccessTokenPrincipalFactory
     {

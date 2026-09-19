@@ -1,4 +1,4 @@
-namespace Quipu.Bookstore.Api.Authentication
+namespace Quipu.Bookstore.Api.Authentication.Seeding
 {
     public class DevelopmentAuthOptions
     {

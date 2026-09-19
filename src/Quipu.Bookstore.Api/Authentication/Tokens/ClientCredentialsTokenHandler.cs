@@ -2,7 +2,7 @@ using OpenIddict.Abstractions;
 using OpenIddict.Server;
 using static OpenIddict.Server.OpenIddictServerEvents;
 
-namespace Quipu.Bookstore.Api.Authentication
+namespace Quipu.Bookstore.Api.Authentication.Tokens
 {
     public class ClientCredentialsTokenHandler : IOpenIddictServerHandler<HandleTokenRequestContext>
     {

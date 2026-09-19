@@ -1,0 +1,35 @@
+﻿## .NET build artifacts
+bin/
+obj/
+
+## Visual Studio and IDE files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln.iml
+
+## Local configuration and secrets
+.env
+.env.*
+!.env.example
+appsettings.*.local.json
+
+## Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+## NuGet packages
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+## Operating-system files
+.DS_Store
+Thumbs.db
+
+## Logs
+*.log

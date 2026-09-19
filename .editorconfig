@@ -1,0 +1,28 @@
+root = true
+
+# Project conventions that no Roslyn/EditorConfig rule can enforce — applied manually:
+#
+# Using directives
+#   1. Quipu.Bookstore.* namespaces first, alphabetical.
+#   2. One blank line, then all external namespaces as a single alphabetical block.
+#   3. "using static" directives last. No using aliases.
+#   4. No usings already provided by ImplicitUsings.
+#   Visual Studio "Sort Usings" and "dotnet format" reorder Quipu.* after Microsoft.*.
+#   Use "Remove Unnecessary Usings" only.
+#
+# Layout
+#   - Block-scoped namespaces.
+#   - One blank line between constants and between properties.
+#   - Single-statement if/else/foreach bodies omit braces; multi-statement bodies use braces.
+#   - Primary constructors for dependency injection; injected parameters use _camelCase.
+#   - Explicit types instead of var.
+#   - Named arguments when calling project methods and constructors with two or more arguments.
+#   - No sealed modifiers.
+
+[*.cs]
+csharp_style_namespace_declarations = block_scoped:warning
+csharp_new_line_before_open_brace = all
+csharp_prefer_braces = false:silent
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = false:suggestion
+csharp_style_var_elsewhere = false:suggestion

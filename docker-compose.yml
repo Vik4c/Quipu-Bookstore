@@ -1,0 +1,37 @@
+# Defaults below are local assessment-only mock values, not production credentials.
+# Override any of them with a local .env file (see .env.example).
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-SqlDev12345!}
+    ports:
+      - "${SQLSERVER_HOST_PORT:-1433}:1433"
+    volumes:
+      - quipu-bookstore-sqldata:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -N -Q \"SELECT 1\" -b -o /dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__BookstoreDatabase: "Server=sqlserver,1433;Database=${MSSQL_DB_NAME:-QuipuBookstore};User Id=sa;Password=${MSSQL_SA_PASSWORD:-SqlDev12345!};TrustServerCertificate=True;MultipleActiveResultSets=true"
+      DevelopmentAuth__Password: ${DEV_AUTH_PASSWORD:-bookstore123}
+      DevelopmentAuth__CrudClientSecret: ${DEV_AUTH_CRUD_CLIENT_SECRET:-crud123!}
+      Oidc__SwaggerRedirectUris__0: "http://localhost:${API_HTTP_PORT:-5107}/swagger/oauth2-redirect.html"
+    ports:
+      - "${API_HTTP_PORT:-5107}:8080"
+
+volumes:
+  quipu-bookstore-sqldata:

@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Quipu Bookstore API",
-    "description": "Manual test collection for the Quipu Bookstore API running locally (Docker or dotnet run).\n\nSet `crudClientSecret` (Current value only) before running. Search requests need `readAccessToken`, obtained through the implicit flow. See docs/postman/README.md. No credentials are stored in this collection.",
+    "description": "Manual test collection for the Quipu Bookstore API running locally (Docker or dotnet run).\n\nIncludes the documented local-development default for `crudClientSecret`, so client-credentials requests run without setup. Search requests still need `readAccessToken`, obtained through the interactive implicit browser flow. See docs/postman/README.md. No real credentials are stored in this collection.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {

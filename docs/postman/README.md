@@ -1,6 +1,6 @@
 # Manual API testing with Postman
 
-`quipu-bookstore.postman_collection.json` exercises every Book endpoint, both OAuth2 flows, and the expected success and error status codes. It contains no credentials; secrets are entered locally in Postman.
+`quipu-bookstore.postman_collection.json` exercises every Book endpoint, both OAuth2 flows, and the expected success and error status codes. It includes the documented local-development defaults needed for the client-credentials flow. The implicit-flow token remains interactive and must be entered locally in Postman.
 
 For prerequisites, architecture, the OAuth2 design and the full endpoint reference, see the root [README](../../README.md).
 
@@ -26,7 +26,7 @@ Open the collection → **Variables** tab and edit the **Current value** column 
 |---|---|---|
 | `baseUrl` | `http://localhost:5107` | API root; change it if you set a different `API_HTTP_PORT` |
 | `crudClientId` | `bookstore-crud-client` | client_credentials client |
-| `crudClientSecret` | *(empty)* | **set locally**: see [Local development credentials](../../README.md#local-development-credentials), or your override |
+| `crudClientSecret` | `crud123!` | pre-filled with the documented local-development default ([Local development credentials](../../README.md#local-development-credentials)); replace only if you changed it locally |
 | `readClientId` | `bookstore-swagger-client` | implicit-flow client |
 | `scopeManage` / `scopeRead` | `books.manage` / `books.read` | OAuth2 scopes |
 | `implicitRedirectUri` | `http://localhost:5107/swagger/oauth2-redirect.html` | redirect URI registered for the implicit client |
@@ -36,7 +36,9 @@ Open the collection → **Variables** tab and edit the **Current value** column 
 | `readAccessToken` | *(empty)* | filled by you after the implicit flow |
 | `createdBookId` | *(empty)* | filled by **Create book** |
 
-Never put the secret or a token in the **Initial value** column, and never export or commit the collection with them filled in.
+The client-credentials requests (folders **02**-**04**) work immediately after a clean import; `crudClientSecret` already holds the documented local-development default, so no manual secret entry is required. The implicit-flow requests (folders **05**-**06**) still require the interactive browser authorization step described below, and `readAccessToken` must be filled in manually — that step cannot be automated.
+
+The included `crud123!` value is an intentional local-development mock credential. Do not replace it with a real secret, and never place private credentials or tokens in the **Initial value** column or commit them to the repository.
 
 ## Get a client-credentials token
 
@@ -84,7 +86,7 @@ This keeps the SQL Server data volume. Do not add `-v` unless you intend to dele
 
 | Symptom | Cause and fix |
 |---|---|
-| **Get CRUD token** fails its first assertion, or returns 401 `invalid_client` | `crudClientSecret` is empty or wrong. Set the current value; if you override credentials, use your value ([Overriding the defaults](../../README.md#overriding-the-defaults)). |
+| **Get CRUD token** fails its first assertion, or returns 401 `invalid_client` | Only happens if you changed the local development credentials. Set `crudClientSecret` to your overridden value ([Overriding the defaults](../../README.md#overriding-the-defaults)). |
 | Search or CRUD requests return 401 although a token was set | The token expired (about one hour), or the `api` container was recreated and its development signing keys changed. Request a new token. |
 | Search returns 403 | `readAccessToken` holds a CRUD token, or the reverse. Each token only carries its own scope. |
 | **Get New Access Token** fails with a redirect-URI error | **Authorize using browser** is on, or the callback URL was changed. Use `{{implicitRedirectUri}}` with the in-app window. |
